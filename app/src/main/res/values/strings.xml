@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AirInfo</string>
+    <string name="PM10">Pył zawieszony w powietrzu, który zawiera cząsteczki siarki, związki organiczne, metale ciężkie, dioksyny i alergeny.
+Pył PM10 to pył, w którym średnicza częsteczki nie przekracza 10\u00B5m. \n\n Według <b>WHO</b> norma stężenia pyłu 24- godzinna wynosi <b>50\u00B5\u33A5</b>, a norma roczna wynosi <b>20\u00B5\u33A5</b></string>
+    <string name="ZRODLO1">Źródło: http://smog.imgw.pl/content/health</string>
+    <string name="PM2">Pył zawieszony w powietrzu, który zawiera cząsteczki siarki, związki organiczne, metale ciężkie, dioksyny i alergeny.
+Pył PM2,5 to pył, w którym średnicza częsteczki nie przekracza 2,5\u00B5m. \n\n Według <b>WHO</b> norma stężenia pyłu 24- godzinna wynosi <b>25\u00B5\u33A5</b>, a norma roczna wynosi <b>10\u00B5\u33A5</b></string>
+    <string name="PM1">Pył zawieszony w powietrzu, który zawiera cząsteczki siarki, związki organiczne, metale ciężkie, dioksyny i alergeny.
+Pył PM1 to pył, w którym średnicza częsteczki nie przekracza 2,5\u00B5m. \n\n  <b>WHO</b> nie ustaliło norm dla tego pyłu</string>
+</resources>
