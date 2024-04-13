@@ -33,7 +33,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "dc94dfa0079ac3bf956a89f5f6b56d81";
+    final String API = "KEY";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
     final String CityName_URL = "http://api.openweathermap.org/data/2.5/weather";
