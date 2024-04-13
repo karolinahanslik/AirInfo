@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#35374B"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cityFinder">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/arrow">
+
+    </ImageView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="Wprowadź nazwę miasta"
+        android:layout_marginLeft="30dp"
+        android:textSize="28sp"
+        android:background="@drawable/edittextdesign"
+        android:textColor="@color/black"
+        android:imeOptions="actionGo"
+        android:id="@+id/searchCity"
+        android:inputType="textAutoCorrect"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginRight="30dp">
+
+    </EditText>
+
+</RelativeLayout>

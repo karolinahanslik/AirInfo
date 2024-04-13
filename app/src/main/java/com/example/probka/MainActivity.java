@@ -3,6 +3,7 @@ package com.example.probka;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     String latitude, longitude;
 
-
+    RelativeLayout mCityFinder;
     TextView cityName;
     TextView PM10_TextView;
     TextView PM2_TextView;
@@ -88,17 +90,18 @@ public class MainActivity extends AppCompatActivity {
         SmogCardView = (CardView) findViewById(R.id.SmogCardView);
         PylkiCardView = (CardView) findViewById(R.id.PylkiCardView);
         cityName = (TextView) findViewById(R.id.CityName);
-        LocalizationButton = findViewById(R.id.Localization);
+        mCityFinder = findViewById(R.id.Localization);
         Data_Godzina = findViewById(R.id.DateHour);
 
         PM10Dialog.setContentView(R.layout.pm10_layout);
         PM2Dialog.setContentView(R.layout.pm2_layout);
         CODialog.setContentView(R.layout.pm1_layout);
 
-        LocalizationButton.setOnClickListener(new View.OnClickListener() {
+        mCityFinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                tu cos dodac, żeby aktualizowała się lokalizacja po kliknięciu w button
+                Intent intent = new Intent(MainActivity.this, cityFinder.class);
+                startActivity(intent);
             }
         });
 
@@ -196,10 +199,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        getPollutionforCurrentLocation();
+//    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        getPollutionforCurrentLocation();
+        Intent mIntent = getIntent();
+        String city = mIntent.getStringExtra("City");
+        if (city != null) {
+            getPollutionforNewCity(city);
+        } else {
+            getPollutionforCurrentLocation();
+        }
+    }
+
+    private void getPollutionforNewCity(String city)
+    {
+        RequestParams params = new RequestParams();
+        params.put("q", city);
+        params.put("appid", API);
+        letsdoMoreNetworking(params);
     }
 
     private void getPollutionforCurrentLocation() {
@@ -310,6 +333,33 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void letsdoMoreNetworking(RequestParams params)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(CityName_URL, params, new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        //Toast.makeText(MainActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                        coordsData coordsD = coordsData.fromJson(response);
+                        updateLL(coordsD);
+                        RequestParams params2 = new RequestParams();
+                        params2.put("lat", latitude);
+                        params2.put("lon", longitude);
+                        params2.put("appid", API);
+                        letsdoSomeNetworking(params2);
+                        //super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        //super.onFailure(statusCode, headers, throwable, errorResponse);
+                    }
+                }
+        );
+    }
+
     private void updateUI(pollutionData pollution)
     {
         CO_TextView.setText(pollution.getmCO());
@@ -325,6 +375,12 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
         String date = formatter.format(today);
         Data_Godzina.setText(date);
+    }
+
+    private void updateLL(coordsData coordsD)
+    {
+        latitude = coordsD.getmLat();
+        longitude = coordsD.getmLon();
     }
 
     @Override

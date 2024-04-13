@@ -69,13 +69,14 @@
             tools:ignore="MissingConstraints" />
 
         <!--        przycisk lokalizujący użytkownika-->
-        <ImageButton
+        <!--        tu zmieniam z ImageButton na RelativeLayout-->
+<!--        android:src="@mipmap/loc"-->
+        <RelativeLayout
             android:id="@+id/Localization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="#35374B"
-            android:src="@mipmap/loc"
+            android:layout_marginRight="30dp"
+            android:background="@mipmap/loc"
             app:layout_constraintBottom_toBottomOf="@id/CityName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/CityName" />
