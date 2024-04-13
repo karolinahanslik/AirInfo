@@ -67,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/NazwaAplikacji"
             tools:ignore="MissingConstraints" />
 
+        <!--        przycisk lokalizujący użytkownika-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,6 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/CityName" />
 
+        <!--        data i godzina-->
         <TextView
             android:id="@+id/DateHour"
             android:layout_width="wrap_content"
@@ -185,6 +187,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints,NotSibling" />
 
+                <!--        textview dla smogu-->
                 <TextView
                     android:id="@+id/SmogTextView"
                     android:layout_width="0dp"
@@ -195,7 +198,7 @@
                     android:gravity="center"
                     android:shadowColor="@color/black"
                     android:shadowRadius="10"
-                    android:text="Dzisiaj w zbarzu jest duże znaieczyszcenie powietrza, unikaj wyjścia na dwór "
+                    android:text="Dzisiaj w Zabrzu jest duże zanieczyszczenie powietrza, unikaj wyjścia na dwór."
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@id/Rightguideline1"
                     app:layout_constraintStart_toStartOf="@id/Leftguideline1"
@@ -212,6 +215,7 @@
                     app:layout_constraintStart_toStartOf="@id/Leftguideline1"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!--        textview dla pyłków-->
                 <TextView
                     android:id="@+id/PylkiTextView"
                     android:layout_width="0dp"
@@ -222,7 +226,7 @@
                     android:gravity="center"
                     android:shadowColor="@color/black"
                     android:shadowRadius="10"
-                    android:text="Dzisiaj mocno pyli brzoza, dąb trawy oraz słoneczniki"
+                    android:text="Dzisiaj mocno pylą: brzoza, dąb, trawy oraz słoneczniki."
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@id/Rightguideline1"
                     app:layout_constraintStart_toStartOf="@id/Leftguideline1"
@@ -238,6 +242,7 @@
                     app:layout_constraintStart_toStartOf="@id/Leftguideline1"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!--        textview dla porad-->
                 <TextView
                     android:id="@+id/PoradyTextView"
                     android:layout_width="0dp"
@@ -248,7 +253,7 @@
                     android:gravity="center"
                     android:shadowColor="@color/black"
                     android:shadowRadius="10"
-                    android:text="Aby uniknąć chorób układu oddechwoego zabezpieczaj się przed smogiem"
+                    android:text="Aby uniknąć chorób układu oddechwoego, zabezpieczaj się przed smogiem."
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@id/Rightguideline1"
                     app:layout_constraintStart_toStartOf="@id/Leftguideline1"
@@ -314,6 +319,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/PM10_TextView"
                             app:layout_constraintStart_toStartOf="@+id/PM10_TextView" />
 
+                        <!--        PM10 odniesienie do normy-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -333,6 +339,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/PM1_TextView"
                             app:layout_constraintStart_toStartOf="@+id/PM1_TextView" />
 
+                        <!--        PM1 wartosc z API-->
                         <TextView
                             android:id="@+id/PM1_TextView"
                             android:layout_width="80dp"
@@ -351,6 +358,7 @@
                             app:layout_constraintStart_toEndOf="@+id/PM2_TextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        PM10 wartosc z API-->
                         <TextView
                             android:id="@+id/PM10_TextView"
                             android:layout_width="80dp"
@@ -370,6 +378,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        PM2,5 wartosc z API-->
                         <TextView
                             android:id="@+id/PM2_TextView"
                             android:layout_width="80dp"
@@ -386,6 +395,7 @@
                             app:layout_constraintStart_toEndOf="@+id/PM10_TextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        PM1 odniesienie do normy-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -404,6 +414,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/PM2_TextView"
                             app:layout_constraintStart_toStartOf="@+id/PM2_TextView" />
 
+                        <!--        PM2,5 odniesienie do normy-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -427,6 +438,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/PmCardView" />
 
+                <!--        PM10 wykres-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/WykresP10_CardView"
                     android:layout_width="0dp"
@@ -450,6 +462,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresP10_CardView" />
 
+                <!--        PM1 wykres-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/WykresPM1CardView"
                     android:layout_width="0dp"
@@ -473,6 +486,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresPM1CardView" />
 
+                <!--        PM2,5 wykres-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -553,6 +567,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/BrzozaTextView"
                             app:layout_constraintStart_toStartOf="@+id/BrzozaTextView" />
 
+                        <!--        brzoza wartosc z API-->
                         <TextView
                             android:id="@+id/BrzozaTextView"
                             android:layout_width="50dp"
@@ -580,6 +595,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/LipaTextView"
                             app:layout_constraintStart_toStartOf="@+id/LipaTextView" />
 
+                        <!--        lipa wartosc z API-->
                         <TextView
                             android:id="@+id/LipaTextView"
                             android:layout_width="50dp"
@@ -606,6 +622,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/DabTextView"
                             app:layout_constraintStart_toStartOf="@+id/DabTextView" />
 
+                        <!--        dab wartosc z API-->
                         <TextView
                             android:id="@+id/DabTextView"
                             android:layout_width="50dp"
@@ -632,6 +649,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/KlonTextView"
                             app:layout_constraintStart_toStartOf="@+id/KlonTextView" />
 
+                        <!--        klon wartosc z API-->
                         <TextView
                             android:id="@+id/KlonTextView"
                             android:layout_width="50dp"
@@ -659,6 +677,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/JesionTextView"
                             app:layout_constraintStart_toStartOf="@+id/JesionTextView" />
 
+                        <!--        jesion wartosc z API-->
                         <TextView
                             android:id="@+id/JesionTextView"
                             android:layout_width="50dp"
@@ -677,6 +696,7 @@
                             app:layout_constraintStart_toEndOf="@+id/KlonTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        brzoza ocena pylki-->
                         <TextView
                             android:id="@+id/BrzozaPoziomTextView"
                             android:layout_width="51dp"
@@ -687,18 +707,20 @@
                             app:layout_constraintStart_toStartOf="@+id/BrzozaTextView"
                             app:layout_constraintTop_toBottomOf="@id/BrzozaTextView" />
 
+                        <!--        lipa ocena pylki-->
                         <TextView
                             android:id="@+id/LipaPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="niskie"
+                            android:text="Niskie"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/LipaTextView"
                             app:layout_constraintStart_toStartOf="@+id/LipaTextView"
                             app:layout_constraintTop_toBottomOf="@id/LipaTextView" />
 
+                        <!--        dac ocena pylki-->
                         <TextView
-                            android:id="@+id/DabPizomTextView"
+                            android:id="@+id/DabPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wysokie"
@@ -707,6 +729,7 @@
                             app:layout_constraintStart_toStartOf="@+id/DabTextView"
                             app:layout_constraintTop_toBottomOf="@id/DabTextView" />
 
+                        <!--        klon ocena pylki-->
                         <TextView
                             android:id="@+id/KlonPoziomTextView"
                             android:layout_width="wrap_content"
@@ -717,6 +740,7 @@
                             app:layout_constraintStart_toStartOf="@+id/KlonTextView"
                             app:layout_constraintTop_toBottomOf="@id/KlonTextView" />
 
+                        <!--        jesion ocena pylki-->
                         <TextView
                             android:id="@+id/JesionPoziomTextView"
                             android:layout_width="wrap_content"
@@ -765,6 +789,7 @@
                             app:layout_constraintEnd_toEndOf="@id/TymotkaTextView"
                             app:layout_constraintStart_toStartOf="@id/TymotkaTextView" />
 
+                        <!--        tymotka wartosc z API-->
                         <TextView
                             android:id="@+id/TymotkaTextView"
                             android:layout_width="50dp"
@@ -794,9 +819,9 @@
                             app:layout_constraintStart_toStartOf="@+id/ZytoTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        zyto wartosc z API-->
                         <TextView
                             android:id="@+id/ZytoTextView"
-
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerVertical="true"
@@ -811,7 +836,6 @@
                             app:layout_constraintEnd_toStartOf="@+id/MielicaTextView"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/TymotkaTextView"
-
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -822,6 +846,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/MielicaTextView"
                             app:layout_constraintStart_toStartOf="@+id/MielicaTextView" />
 
+                        <!--        mielica wartosc z API-->
                         <TextView
                             android:id="@+id/MielicaTextView"
                             android:layout_width="50dp"
@@ -848,6 +873,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/KostrzewaTextView"
                             app:layout_constraintStart_toStartOf="@+id/KostrzewaTextView" />
 
+                        <!--        kostrzewa wartosc z API-->
                         <TextView
                             android:id="@+id/KostrzewaTextView"
                             android:layout_width="50dp"
@@ -874,6 +900,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
                             app:layout_constraintStart_toStartOf="@+id/TrawaTextView" />
 
+                        <!--        trawa wartosc z API-->
                         <TextView
                             android:id="@+id/TrawaTextView"
                             android:layout_width="50dp"
@@ -892,6 +919,7 @@
                             app:layout_constraintStart_toEndOf="@id/KostrzewaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        tymotka ocena pylki-->
                         <TextView
                             android:id="@+id/TymotkaPoziomTextView"
                             android:layout_width="wrap_content"
@@ -902,18 +930,20 @@
                             app:layout_constraintStart_toStartOf="@+id/TymotkaTextView"
                             app:layout_constraintTop_toBottomOf="@id/TymotkaTextView" />
 
+                        <!--        zyto ocena pylki-->
                         <TextView
                             android:id="@+id/ZytoPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="niskie"
+                            android:text="Niskie"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/ZytoTextView"
                             app:layout_constraintStart_toStartOf="@+id/ZytoTextView"
                             app:layout_constraintTop_toBottomOf="@id/ZytoTextView" />
 
+                        <!--        mielica ocena pylki-->
                         <TextView
-                            android:id="@+id/MietlicaPizomTextView"
+                            android:id="@+id/MielicaPizomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wysokie"
@@ -922,6 +952,7 @@
                             app:layout_constraintStart_toStartOf="@+id/MielicaTextView"
                             app:layout_constraintTop_toBottomOf="@id/MielicaTextView" />
 
+                        <!--        kostrzewa ocena pylki-->
                         <TextView
                             android:id="@+id/KostrzewaPoziomTextView"
                             android:layout_width="wrap_content"
@@ -932,6 +963,7 @@
                             app:layout_constraintStart_toStartOf="@+id/KostrzewaTextView"
                             app:layout_constraintTop_toBottomOf="@id/KostrzewaTextView" />
 
+                        <!--        trawa ocena pylki-->
                         <TextView
                             android:id="@+id/TrawaPoziomTextView"
                             android:layout_width="wrap_content"
@@ -981,6 +1013,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/ZiemowitTextView"
                             app:layout_constraintStart_toStartOf="@+id/ZiemowitTextView" />
 
+                        <!--        ziemowit wartosc z API-->
                         <TextView
                             android:id="@+id/ZiemowitTextView"
                             android:layout_width="50dp"
@@ -1008,6 +1041,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/KonwaliaTextView"
                             app:layout_constraintStart_toStartOf="@+id/KonwaliaTextView" />
 
+                        <!--        konwalia wartosc z API-->
                         <TextView
                             android:id="@+id/KonwaliaTextView"
                             android:layout_width="50dp"
@@ -1034,6 +1068,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/OleanderTextView"
                             app:layout_constraintStart_toStartOf="@+id/OleanderTextView" />
 
+                        <!--        oleander wartosc z API-->
                         <TextView
                             android:id="@+id/OleanderTextView"
                             android:layout_width="50dp"
@@ -1061,6 +1096,7 @@
                             app:layout_constraintEnd_toEndOf="@id/NaparstnicaTextView"
                             app:layout_constraintStart_toStartOf="@id/NaparstnicaTextView" />
 
+                        <!--        naparstnica wartosc z API-->
                         <TextView
                             android:id="@+id/NaparstnicaTextView"
                             android:layout_width="50dp"
@@ -1087,6 +1123,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/GlicyniaTextView"
                             app:layout_constraintStart_toStartOf="@+id/GlicyniaTextView" />
 
+                        <!--        glicynia wartosc z API-->
                         <TextView
                             android:id="@+id/GlicyniaTextView"
                             android:layout_width="50dp"
@@ -1104,6 +1141,7 @@
                             app:layout_constraintStart_toEndOf="@id/NaparstnicaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--        ziemowit ocena pyłki-->
                         <TextView
                             android:id="@+id/ZiemowitPoziomTextView"
                             android:layout_width="wrap_content"
@@ -1114,18 +1152,20 @@
                             app:layout_constraintStart_toStartOf="@+id/ZiemowitTextView"
                             app:layout_constraintTop_toBottomOf="@id/ZiemowitTextView" />
 
+                        <!--        konwalia ocena pyłki-->
                         <TextView
                             android:id="@+id/KonwaliaPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="niskie"
+                            android:text="Niskie"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@id/KonwaliaTextView"
                             app:layout_constraintStart_toStartOf="@id/KonwaliaTextView"
                             app:layout_constraintTop_toBottomOf="@id/KonwaliaTextView" />
 
+                        <!--        Oleander ocena pyłki-->
                         <TextView
-                            android:id="@+id/OleanderPizomTextView"
+                            android:id="@+id/OleanderPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wysokie"
@@ -1134,6 +1174,7 @@
                             app:layout_constraintStart_toStartOf="@+id/OleanderTextView"
                             app:layout_constraintTop_toBottomOf="@id/OleanderTextView" />
 
+                        <!--        naparstnica ocena pyłki-->
                         <TextView
                             android:id="@+id/NaparstnicaPoziomTextView"
                             android:layout_width="wrap_content"
@@ -1144,6 +1185,7 @@
                             app:layout_constraintStart_toStartOf="@+id/NaparstnicaTextView"
                             app:layout_constraintTop_toBottomOf="@id/NaparstnicaTextView" />
 
+                        <!--        glicynia ocena pyłki-->
                         <TextView
                             android:id="@+id/GlicyniaPoziomTextView"
                             android:layout_width="wrap_content"

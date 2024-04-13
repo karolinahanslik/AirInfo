@@ -19,7 +19,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
     ImageButton HomeButton;
     TextView SmogButton;
-   TextView PylkiButton;
+    TextView PylkiButton;
     CardView HomeCardView;
     CardView SmogCardView;
     TextView PM10_TextView;
