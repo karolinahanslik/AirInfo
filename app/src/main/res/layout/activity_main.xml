@@ -53,6 +53,7 @@
             app:layout_constraintBottom_toBottomOf="@id/NazwaAplikacji"
            app:layout_constraintStart_toEndOf="@id/NazwaAplikacji"/>
 
+        <!--        nazwa miasta-->
         <TextView
             android:id="@+id/CityName"
             android:layout_width="wrap_content"
@@ -69,6 +70,7 @@
 
         <!--        przycisk lokalizujący użytkownika-->
         <ImageButton
+            android:id="@+id/Localization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -334,14 +336,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
-                            android:text="PM1"
+                            android:text="CO"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/PM1_TextView"
-                            app:layout_constraintStart_toStartOf="@+id/PM1_TextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/CO_TextView"
+                            app:layout_constraintStart_toStartOf="@+id/CO_TextView" />
 
-                        <!--        PM1 wartosc z API-->
+                        <!--        CO wartosc z API-->
                         <TextView
-                            android:id="@+id/PM1_TextView"
+                            android:id="@+id/CO_TextView"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_centerVertical="true"
@@ -390,21 +392,21 @@
                             android:text="5"
                             android:textColor="#247127"
                             android:textSize="20dp"
-                            app:layout_constraintEnd_toStartOf="@+id/PM1_TextView"
+                            app:layout_constraintEnd_toStartOf="@+id/CO_TextView"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/PM10_TextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!--        PM1 odniesienie do normy-->
+                        <!--        CO odniesienie do normy-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="90%"
                             android:textColor="#A16E22"
-                            app:layout_constraintEnd_toEndOf="@+id/PM1_TextView"
-                            app:layout_constraintStart_toStartOf="@+id/PM1_TextView"
-                            app:layout_constraintTop_toBottomOf="@id/PM1_TextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/CO_TextView"
+                            app:layout_constraintStart_toStartOf="@+id/CO_TextView"
+                            app:layout_constraintTop_toBottomOf="@id/CO_TextView" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -453,18 +455,18 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/NazwaPm1"
+                    android:id="@+id/NazwaCO"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Wykres zmiany wartości PM1:"
+                    android:text="Wykres zmiany wartości CO:"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresP10_CardView" />
 
-                <!--        PM1 wykres-->
+                <!--        CO wykres-->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/WykresPM1CardView"
+                    android:id="@+id/WykresCOCardView"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="10dp"
@@ -472,7 +474,7 @@
                     app:cardCornerRadius="20dp"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
-                    app:layout_constraintTop_toBottomOf="@id/NazwaPm1">
+                    app:layout_constraintTop_toBottomOf="@id/NazwaCO">
 
                 </androidx.cardview.widget.CardView>
 
@@ -484,7 +486,7 @@
                     android:text="Wykres zmiany Wartości PM2,5"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
-                    app:layout_constraintTop_toBottomOf="@id/WykresPM1CardView" />
+                    app:layout_constraintTop_toBottomOf="@id/WykresCOCardView" />
 
                 <!--        PM2,5 wykres-->
                 <androidx.cardview.widget.CardView
