@@ -539,7 +539,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DRZEWA:"
+                    android:text="ALERGERY:"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/Leftguideline4" />
@@ -565,14 +565,14 @@
                             android:id="@+id/textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Brzoza"
+                            android:text="Trawy"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/BrzozaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/BrzozaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/TrawaTextView" />
 
-                        <!--        brzoza wartosc z API-->
+                        <!--        trawa wartosc z API-->
                         <TextView
-                            android:id="@+id/BrzozaTextView"
+                            android:id="@+id/TrawaTextView"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerVertical="true"
@@ -584,7 +584,7 @@
                             android:textAlignment="center"
                             android:textColor="#A31010"
                             android:textSize="20dp"
-                            app:layout_constraintEnd_toStartOf="@+id/LipaTextView"
+                            app:layout_constraintEnd_toStartOf="@+id/PlesnTextView"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/textView"
                             app:layout_constraintStart_toStartOf="parent"
@@ -593,14 +593,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lipa"
+                            android:text="Plesn"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/LipaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/LipaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/PlesnTextView"
+                            app:layout_constraintStart_toStartOf="@+id/PlesnTextView" />
 
-                        <!--        lipa wartosc z API-->
+                        <!--        plesn wartosc z API-->
                         <TextView
-                            android:id="@+id/LipaTextView"
+                            android:id="@+id/PlesnTextView"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerVertical="true"
@@ -612,22 +612,22 @@
                             android:textAlignment="center"
                             android:textColor="#4CAF50"
                             android:textSize="20dp"
-                            app:layout_constraintEnd_toStartOf="@+id/DabTextView"
+                            app:layout_constraintEnd_toStartOf="@+id/DrzewaTextView"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/BrzozaTextView"
+                            app:layout_constraintStart_toEndOf="@+id/TrawaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dąb"
+                            android:text="Drzewa"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/DabTextView"
-                            app:layout_constraintStart_toStartOf="@+id/DabTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/DrzewaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/DrzewaTextView" />
 
-                        <!--        dab wartosc z API-->
+                        <!--        drzewa wartosc z API-->
                         <TextView
-                            android:id="@+id/DabTextView"
+                            android:id="@+id/DrzewaTextView"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerVertical="true"
@@ -639,22 +639,22 @@
                             android:textAlignment="center"
                             android:textColor="#A31010"
                             android:textSize="20dp"
-                            app:layout_constraintEnd_toStartOf="@+id/KlonTextView"
+                            app:layout_constraintEnd_toStartOf="@+id/AmbrozjaTextView"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/LipaTextView"
+                            app:layout_constraintStart_toEndOf="@+id/PlesnTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Klon"
+                            android:text="Ambrozja"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/KlonTextView"
-                            app:layout_constraintStart_toStartOf="@+id/KlonTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/AmbrozjaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/AmbrozjaTextView" />
 
-                        <!--        klon wartosc z API-->
+                        <!--        ambrozja wartosc z API-->
                         <TextView
-                            android:id="@+id/KlonTextView"
+                            android:id="@+id/AmbrozjaTextView"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerVertical="true"
@@ -668,7 +668,7 @@
                             android:textSize="20dp"
                             app:layout_constraintEnd_toStartOf="@+id/JesionTextView"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/DabTextView"
+                            app:layout_constraintStart_toEndOf="@+id/DrzewaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -696,52 +696,52 @@
 
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/KlonTextView"
+                            app:layout_constraintStart_toEndOf="@+id/AmbrozjaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!--        brzoza ocena pylki-->
+                        <!--        trawa ocena pylki-->
                         <TextView
-                            android:id="@+id/BrzozaPoziomTextView"
+                            android:id="@+id/TrawaPoziomTextView"
                             android:layout_width="51dp"
                             android:layout_height="23dp"
                             android:text="Wysokie"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/BrzozaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/BrzozaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/BrzozaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/TrawaTextView"
+                            app:layout_constraintTop_toBottomOf="@id/TrawaTextView" />
 
-                        <!--        lipa ocena pylki-->
+                        <!--        plesn ocena pylki-->
                         <TextView
-                            android:id="@+id/LipaPoziomTextView"
+                            android:id="@+id/PlesnPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Niskie"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/LipaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/LipaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/LipaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/PlesnTextView"
+                            app:layout_constraintStart_toStartOf="@+id/PlesnTextView"
+                            app:layout_constraintTop_toBottomOf="@id/PlesnTextView" />
 
                         <!--        dac ocena pylki-->
                         <TextView
-                            android:id="@+id/DabPoziomTextView"
+                            android:id="@+id/DrzewaPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wysokie"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/DabTextView"
-                            app:layout_constraintStart_toStartOf="@+id/DabTextView"
-                            app:layout_constraintTop_toBottomOf="@id/DabTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/DrzewaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/DrzewaTextView"
+                            app:layout_constraintTop_toBottomOf="@id/DrzewaTextView" />
 
-                        <!--        klon ocena pylki-->
+                        <!--        ambrozja ocena pylki-->
                         <TextView
-                            android:id="@+id/KlonPoziomTextView"
+                            android:id="@+id/AmbrozjaPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Średnie"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/KlonTextView"
-                            app:layout_constraintStart_toStartOf="@+id/KlonTextView"
-                            app:layout_constraintTop_toBottomOf="@id/KlonTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/AmbrozjaTextView"
+                            app:layout_constraintStart_toStartOf="@+id/AmbrozjaTextView"
+                            app:layout_constraintTop_toBottomOf="@id/AmbrozjaTextView" />
 
                         <!--        jesion ocena pylki-->
                         <TextView
@@ -890,7 +890,7 @@
                             android:textAlignment="center"
                             android:textColor="#CC512B"
                             android:textSize="20dp"
-                            app:layout_constraintEnd_toStartOf="@+id/TrawaTextView"
+                            app:layout_constraintEnd_toStartOf="@+id/delTextView"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/MielicaTextView"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -898,14 +898,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Trawa"
+                            android:text="del"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/TrawaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/delTextView"
+                            app:layout_constraintStart_toStartOf="@+id/delTextView" />
 
-                        <!--        trawa wartosc z API-->
+                        <!--        del wartosc z API-->
                         <TextView
-                            android:id="@+id/TrawaTextView"
+                            android:id="@+id/delTextView"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
@@ -966,16 +966,16 @@
                             app:layout_constraintStart_toStartOf="@+id/KostrzewaTextView"
                             app:layout_constraintTop_toBottomOf="@id/KostrzewaTextView" />
 
-                        <!--        trawa ocena pylki-->
+                        <!--        del ocena pylki-->
                         <TextView
-                            android:id="@+id/TrawaPoziomTextView"
+                            android:id="@+id/delPoziomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wysokie"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/TrawaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/TrawaTextView" />
+                            app:layout_constraintEnd_toEndOf="@+id/delTextView"
+                            app:layout_constraintStart_toStartOf="@+id/delTextView"
+                            app:layout_constraintTop_toBottomOf="@id/delTextView" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 

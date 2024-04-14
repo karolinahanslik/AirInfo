@@ -30,15 +30,19 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "KEY";
+    final String API = "KEY1";
+    final String API2 = "KEY2";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
     final String CityName_URL = "http://api.openweathermap.org/data/2.5/weather";
+
+    final String CityKey_URL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search";
 
     final long MIN_TIME = 5000;
     final float MIN_DISTANCE = 1000;
@@ -48,18 +52,26 @@ public class MainActivity extends AppCompatActivity {
 
     String latitude, longitude;
 
+    String final_keyData;
+
+    //final String Pollen_URL = String.join("", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
+
     RelativeLayout mCityFinder;
     TextView cityName;
     TextView PM10_TextView;
     TextView PM2_TextView;
     TextView CO_TextView;
 
+    TextView trawa_TextView;
+    TextView plesn_TextView;
+    TextView drzewa_TextView;
+    TextView ambrozja_TextView;
+
     TextView Data_Godzina;
 
     LocationManager mLocationManager;
     LocationListener mLocationListener;
 
-    ImageButton LocalizationButton;
     ImageButton HomeButton;
     TextView SmogButton;
     TextView PylkiButton;
@@ -96,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
         PM10Dialog.setContentView(R.layout.pm10_layout);
         PM2Dialog.setContentView(R.layout.pm2_layout);
         CODialog.setContentView(R.layout.pm1_layout);
+
+        trawa_TextView = findViewById(R.id.TrawaTextView);
+        plesn_TextView = findViewById(R.id.PlesnTextView);
+        drzewa_TextView = findViewById(R.id.DrzewaTextView);
+        ambrozja_TextView = findViewById(R.id.AmbrozjaTextView);
 
         mCityFinder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,8 +229,10 @@ public class MainActivity extends AppCompatActivity {
         String city = mIntent.getStringExtra("City");
         if (city != null) {
             getPollutionforNewCity(city);
+
         } else {
             getPollutionforCurrentLocation();
+            getCurrentLocationKey();
         }
     }
 
@@ -223,6 +242,65 @@ public class MainActivity extends AppCompatActivity {
         params.put("q", city);
         params.put("appid", API);
         letsdoMoreNetworking(params);
+    }
+
+    private void getPollenforAnyCity(String final_keyData)
+    {
+        RequestParams params = new RequestParams();
+        params.put("apikey", API2);
+        //params.put("language", "pl-pl");
+        params.put("details", "true");
+        params.put("metric", "false");
+        letsdoEvenMoreNetworking(params);
+    }
+
+    private void getCurrentLocationKey() {
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                String Latitude = String.valueOf(location.getLatitude());
+                String Longitude = String.valueOf(location.getLongitude());
+
+                String test = String.join(",", Latitude, Longitude);
+
+                RequestParams params = new RequestParams();
+                params.put("apikey", API2);
+                params.put("q", test);
+                letsgetKey(params);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                //not able to get location
+
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        mLocationManager.requestLocationUpdates(Location_Provider, MIN_TIME, MIN_DISTANCE, mLocationListener);
+
     }
 
     private void getPollutionforCurrentLocation() {
@@ -272,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mLocationManager.requestLocationUpdates(Location_Provider, MIN_TIME, MIN_DISTANCE, mLocationListener);
 
-        }
+    }
 
 //        ten kod leci za każdym razem, gdy włączamy apkę
     @Override
@@ -360,12 +438,68 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void letsgetKey(RequestParams params)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(CityKey_URL, params, new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        //Toast.makeText(MainActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                        cityKeyData keyData = cityKeyData.fromJson(response);
+                        updateCK(keyData);
+                        getPollenforAnyCity(final_keyData);
+                        //super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        //super.onFailure(statusCode, headers, throwable, errorResponse);
+                        //Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    private void letsdoEvenMoreNetworking(RequestParams params)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(String.join("/", "http://dataservice.accuweather.com/forecasts/v1/daily/1day", final_keyData), params, new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        //Toast.makeText(MainActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                        pollenData plData = pollenData.fromJson(response);
+                        updatePOL(plData);
+                        //super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        //super.onFailure(statusCode, headers, throwable, errorResponse);
+                        //Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
     private void updateUI(pollutionData pollution)
     {
         CO_TextView.setText(pollution.getmCO());
         PM10_TextView.setText(pollution.getmPM10());
         PM2_TextView.setText(pollution.getmPM2());
         int resourceID = getResources().getIdentifier(pollution.getmIcon(), "drawable", getPackageName());
+    }
+
+    private void updatePOL(pollenData pollen)
+    {
+        trawa_TextView.setText(pollen.getmTrawa());
+        plesn_TextView.setText(pollen.getmPlesn());
+        drzewa_TextView.setText(pollen.getmDrzewa());
+        ambrozja_TextView.setText(pollen.getmAmbrozja());
+        //int resourceID = getResources().getIdentifier(pollen.getmIcon(), "drawable", getPackageName());
     }
 
     private void updateCN(cityNameData cityNameD)
@@ -381,6 +515,17 @@ public class MainActivity extends AppCompatActivity {
     {
         latitude = coordsD.getmLat();
         longitude = coordsD.getmLon();
+        String test = String.join(",", latitude, longitude);
+
+        RequestParams params = new RequestParams();
+        params.put("apikey", API2);
+        params.put("q", test);
+        letsgetKey(params);
+    }
+
+    private void updateCK(cityKeyData ckData)
+    {
+        final_keyData = ckData.getmCityKey();
     }
 
     @Override
