@@ -36,7 +36,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "KEY1";
+    final String API = "KEY";
     final String API2 = "KEY2";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
@@ -361,11 +361,12 @@ public class MainActivity extends AppCompatActivity {
         {
             if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
             {
-                Toast.makeText(MainActivity.this, "Poprawno pobrano lokalizację.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Poprawnie pobrano lokalizację.", Toast.LENGTH_SHORT).show();
                 getPollutionforCurrentLocation();
             }
             else
             {
+                Toast.makeText(MainActivity.this, "Nie udało się pobrać lokalizacji.", Toast.LENGTH_SHORT).show();
                 //user denied the permission
 
             }
@@ -388,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
-                        //Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Nie udało się pobrać danych.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -406,6 +407,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
+                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -433,6 +435,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
+                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -456,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
-                        //Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -479,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
-                        //Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Nie udało się pobrać danych o pyłkach.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
