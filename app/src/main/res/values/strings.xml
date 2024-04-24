@@ -7,4 +7,13 @@ Pył PM10 to pył, w którym średnicza częsteczki nie przekracza 10\u00B5m. \n
 Pył PM2,5 to pył, w którym średnicza częsteczki nie przekracza 2,5\u00B5m. \n\n Według <b>WHO</b> norma stężenia pyłu 24- godzinna wynosi <b>25\u00B5\u33A5</b>, a norma roczna wynosi <b>10\u00B5\u33A5.</b></string>
     <string name="CO">Źródłem tlenku węgla CO w powietrzu atmosferycznym dużych miejskich aglomeracji są dymy pochodzące z zakładów przemysłowych, dymy komunalne, a także spaliny samochodowe.
         Długotrwała ekspozycja na działanie CO wywołuje zmiany w układzie naczyniowo-sercowym.\n\n  Według <b>WHO</b> norma średniego 8-godz. stężenia wynosi <b>1000\u00B5\u33A5.</b></string>
+    <string name="SO2">Dwutlenek siarki jest szkodliwym związkiem, wykoryztywanym w przemyśle m.in do produkcji leków lub nawozów. Ten związek chemiczny jest w powietrzu
+    za sprawą emisji przemysłowej, lub domowej za którą odpowiadają kotły domowe. Gaz ten jest trujący i duszący. Dzienne, dopuszczalne, bezpieczne spożycie
+    wynosi 0,7mg na kilogram masy ciała. Dla roślin dopuszczlane stężenie SO2 w powietrzu wynosi 125 \u00B5g/m<sup>3</sup></string>
+    <string name="NO2">Dwutlenek Azotu jest niebezpiecznym gazem. W atmosferze bierze się on z transportu, przemysłu, produkcji nawozów. Powoduje on m.in. podrażnienie śluzówek i spojówek, podrażnie drogi oddechowe. Zbyt duże oraz długotrwałe stężenie tego gazu może skutkować
+        chorobami takimi jak astma, choroby układu sercowo naczyniowego oraz nowotwory. Dopuszczalny poziom stężenia tego gazu wynosi 40 \u00B5g/m<sup>3</sup> w skali roku.
+    </string>
+    <string name="O3">Ozon jest szkodliwym dla zdrowia gazem. Powstaje on w reakcjach chemicznych innych gazów w powietrzu, które zachodzą pod wpływem światła. Prowadzi on dl reakcji zapalnych oczu, czy innych chorób dróg oddechowych, a nawet chorób układu krążenia.
+        dopuszczalna średnia z 8-godzin wynosi 120 \u00B5g/m<sup>3</sup>.
+    </string>
 </resources>

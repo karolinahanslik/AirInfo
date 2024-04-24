@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -61,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
     TextView PM10_TextView;
     TextView PM2_TextView;
     TextView CO_TextView;
-
+    TextView SO2_TextView;
+    TextView NO2_TextView;
+    TextView O3_TextView;
     TextView trawa_TextView;
     TextView plesn_TextView;
     TextView drzewa_TextView;
@@ -75,14 +78,21 @@ public class MainActivity extends AppCompatActivity {
     ImageButton HomeButton;
     TextView SmogButton;
     TextView PylkiButton;
+
     CardView HomeCardView;
     CardView SmogCardView;
     ImageButton PM10ExitButton;
     ImageButton PM2ExitButton;
     ImageButton COExitButton;
+    ImageButton SO2ExitButton;
+    ImageButton NO2ExitButton;
+    ImageButton O3ExitButton;
     Dialog PM10Dialog;
     Dialog PM2Dialog;
     Dialog CODialog;
+    Dialog SO2Dialog;
+    Dialog NO2Dialog;
+    Dialog O3Dialog;
     CardView PylkiCardView;
 
     @Override
@@ -94,10 +104,17 @@ public class MainActivity extends AppCompatActivity {
         Dialog PM10Dialog = new Dialog(MainActivity.this);
         Dialog PM2Dialog = new Dialog(MainActivity.this);
         Dialog CODialog = new Dialog(MainActivity.this);
+        Dialog NO2Dialog= new Dialog(MainActivity.this);
+        Dialog SO2Dialog= new Dialog(MainActivity.this);
+        Dialog O3Dialog= new Dialog(MainActivity.this);
+
 
         PM10_TextView = (TextView) findViewById(R.id.PM10_TextView);
         PM2_TextView = (TextView) findViewById(R.id.PM2_TextView);
         CO_TextView = (TextView) findViewById(R.id.CO_TextView);
+        SO2_TextView=(TextView)  findViewById(R.id.SO2_TextView);
+        NO2_TextView=(TextView)  findViewById(R.id.NO2_TextView);
+        O3_TextView=(TextView)  findViewById(R.id.O3_TextView);
         HomeCardView = (CardView) findViewById(R.id.HomeCardView);
         SmogCardView = (CardView) findViewById(R.id.SmogCardView);
         PylkiCardView = (CardView) findViewById(R.id.PylkiCardView);
@@ -108,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
         PM10Dialog.setContentView(R.layout.pm10_layout);
         PM2Dialog.setContentView(R.layout.pm2_layout);
         CODialog.setContentView(R.layout.pm1_layout);
+        SO2Dialog.setContentView(R.layout.so2_layout);
+        NO2Dialog.setContentView(R.layout.no2_layout);
+        O3Dialog.setContentView(R.layout.o3_layout);
 
         trawa_TextView = findViewById(R.id.TrawaTextView);
         plesn_TextView = findViewById(R.id.PlesnTextView);
@@ -121,7 +141,45 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+    SO2_TextView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SO2Dialog.show();
+            ImageButton SO2ExitButton =(ImageButton) SO2Dialog.findViewById(R.id.SO2ExitButton);
+            SO2ExitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SO2Dialog.dismiss();
+                }
+            });
+        }
+    });
+        NO2_TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NO2Dialog.show();
+                ImageButton NO2ExitButton =(ImageButton) NO2Dialog.findViewById(R.id.NO2ExitButton);
+                NO2ExitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        NO2Dialog.dismiss();
+                    }
+                });
+            }
+        });
+        O3_TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                O3Dialog.show();
+                ImageButton O3ExitButton =(ImageButton) O3Dialog.findViewById(R.id.O3ExitButton);
+                O3ExitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        O3Dialog.dismiss();
+                    }
+                });
+            }
+        });
         CO_TextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
