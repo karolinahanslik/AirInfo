@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:background="#6B8C95"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="NO2: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/NO2Info"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="@string/NO2"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:text="https://smoglab.pl"
+        android:textSize="10dp"
+        app:layout_constraintTop_toBottomOf="@id/NO2Info"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#6B8C95"
+        android:rotation="45"
+        android:id="@+id/NO2ExitButton"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/exit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
