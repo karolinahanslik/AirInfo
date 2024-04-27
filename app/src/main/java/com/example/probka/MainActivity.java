@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     long currentEpochTime, pastEpochTime;
 
-    private LineChart wykresPM10;
+    private LineChart wykresPM10, wykresCO, wykresPM2, wykresSO2, wykresNO2, wykresO3;
     private List<String> xValues;
 
     String[] wPM10 = new String[24];
@@ -152,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
         Data_Godzina = findViewById(R.id.DateHour);
 
         wykresPM10 = findViewById(R.id.WykresP10_CardView);
+        wykresCO = findViewById(R.id.WykresCOCardView);
+        wykresPM2 = findViewById(R.id.WykresPM2CardView);
+        wykresSO2 = findViewById(R.id.WykresSO2CardView);
+        wykresNO2 = findViewById(R.id.WykresNO2CardView);
+        wykresO3 = findViewById(R.id.WykresO3CradView);
 
         PM10Dialog.setContentView(R.layout.pm10_layout);
         PM2Dialog.setContentView(R.layout.pm2_layout);
@@ -628,7 +633,7 @@ public class MainActivity extends AppCompatActivity {
     {
         cityName.setText(cityNameD.getmCityName());
         Date today = Calendar.getInstance().getTime();//getting date
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
         String date = formatter.format(today);
         Data_Godzina.setText(date);
 
@@ -640,7 +645,7 @@ public class MainActivity extends AppCompatActivity {
         currentEpochTime = System.currentTimeMillis() / 1000L;
 
         // Data sprzed 24h
-        pastEpochTime = currentEpochTime - 82800;
+        pastEpochTime = currentEpochTime - 86400;
 
         RequestParams params = new RequestParams();
         params.put("lat", latitude);
@@ -678,57 +683,29 @@ public class MainActivity extends AppCompatActivity {
     }
     private void updateWykresy(historicalPollutionData HPData)
     {
-        //String test = HPData.getwPM10(); //dziala
-        wPM10 = HPData.getwPM10();
 
-        //dane z API
         xValues = Arrays.asList("23h", "", "", "", "19h", "", "", "", "15h", "", "", "", "11h", "", "", "", "7h", "", "", "", "3h", "", "", "Teraz");
 
-        Description description = new Description();
-        description.setText("");
-        wykresPM10.setDescription(description);
+        //----------------------------PM_10----------------------------
+        wPM10 = HPData.getwPM10();
+
+        Description descriptionPM10 = new Description();
+        descriptionPM10.setText("");
+        wykresPM10.setDescription(descriptionPM10);
         wykresPM10.getAxisRight().setDrawLabels(false);
 
-        XAxis xAxis = wykresPM10.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
-        xAxis.setLabelCount(24);
-        xAxis.setGranularity(1f);
-        xAxis.setTextColor(Color.BLACK);
+        XAxis xAxisPM10 = wykresPM10.getXAxis();
+        xAxisPM10.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisPM10.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisPM10.setLabelCount(24);
+        xAxisPM10.setGranularity(1f);
+        xAxisPM10.setTextColor(Color.BLACK);
 
-        YAxis yAxis = wykresPM10.getAxisLeft();
-        //yAxis.setAxisMinimum(0f);
-        //yAxis.setAxisMaximum(100f);
-        yAxis.setAxisLineWidth(2f);
-        yAxis.setAxisLineColor(Color.BLACK);
-        //yAxis.setLabelCount(10);
+        YAxis yAxisPM10 = wykresPM10.getAxisLeft();
+        yAxisPM10.setAxisLineWidth(2f);
+        yAxisPM10.setAxisLineColor(Color.BLACK);
 
         List<Entry> dane_PM10 = new ArrayList<>();
-        dane_PM10.add(new Entry(0, 1));
-        dane_PM10.add(new Entry(1, 3));
-        dane_PM10.add(new Entry(2, 7));
-        dane_PM10.add(new Entry(3, 5));
-        dane_PM10.add(new Entry(4, 7));
-        dane_PM10.add(new Entry(5, 1));
-        dane_PM10.add(new Entry(6, 3));
-        dane_PM10.add(new Entry(7, 7));
-        dane_PM10.add(new Entry(8, 5));
-        dane_PM10.add(new Entry(9, 7));
-        dane_PM10.add(new Entry(10, 1));
-        dane_PM10.add(new Entry(11, 3));
-        dane_PM10.add(new Entry(12, 7));
-        dane_PM10.add(new Entry(13, 5));
-        dane_PM10.add(new Entry(14, 7));
-        dane_PM10.add(new Entry(15, 1));
-        dane_PM10.add(new Entry(16, 3));
-        dane_PM10.add(new Entry(17, 7));
-        dane_PM10.add(new Entry(18, 5));
-        dane_PM10.add(new Entry(19, 7));
-        dane_PM10.add(new Entry(20, 1));
-        dane_PM10.add(new Entry(21, 3));
-        dane_PM10.add(new Entry(22, 7));
-        dane_PM10.add(new Entry(23, 5));
-        /*
         dane_PM10.add(new Entry(0,Float.parseFloat(wPM10[0])));
         dane_PM10.add(new Entry(1,Float.parseFloat(wPM10[1])));
         dane_PM10.add(new Entry(2,Float.parseFloat(wPM10[2])));
@@ -753,16 +730,272 @@ public class MainActivity extends AppCompatActivity {
         dane_PM10.add(new Entry(21,Float.parseFloat(wPM10[21])));
         dane_PM10.add(new Entry(22,Float.parseFloat(wPM10[22])));
         dane_PM10.add(new Entry(23,Float.parseFloat(wPM10[23])));
-        */
 
         LineDataSet wykres_PM10 = new LineDataSet(dane_PM10, "PM10");
         wykres_PM10.setColor(Color.BLACK);
-
         LineData PM10LD = new LineData(wykres_PM10);
-
         wykresPM10.setData(PM10LD);
-
         wykresPM10.invalidate();
         wykresPM10.setBackgroundColor(Color.WHITE);
+
+        //----------------------------CO----------------------------
+        wCO = HPData.getwCO();
+
+        Description descriptionCO = new Description();
+        descriptionCO.setText("");
+        wykresCO.setDescription(descriptionCO);
+        wykresCO.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxisCO = wykresCO.getXAxis();
+        xAxisCO.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisCO.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisCO.setLabelCount(24);
+        xAxisCO.setGranularity(1f);
+        xAxisCO.setTextColor(Color.BLACK);
+
+        YAxis yAxisCO = wykresCO.getAxisLeft();
+        yAxisCO.setAxisLineWidth(2f);
+        yAxisCO.setAxisLineColor(Color.BLACK);
+
+        List<Entry> dane_CO = new ArrayList<>();
+        dane_CO.add(new Entry(0,Float.parseFloat(wCO[0])));
+        dane_CO.add(new Entry(1,Float.parseFloat(wCO[1])));
+        dane_CO.add(new Entry(2,Float.parseFloat(wCO[2])));
+        dane_CO.add(new Entry(3,Float.parseFloat(wCO[3])));
+        dane_CO.add(new Entry(4,Float.parseFloat(wCO[4])));
+        dane_CO.add(new Entry(5,Float.parseFloat(wCO[5])));
+        dane_CO.add(new Entry(6,Float.parseFloat(wCO[6])));
+        dane_CO.add(new Entry(7,Float.parseFloat(wCO[7])));
+        dane_CO.add(new Entry(8,Float.parseFloat(wCO[8])));
+        dane_CO.add(new Entry(9,Float.parseFloat(wCO[9])));
+        dane_CO.add(new Entry(10,Float.parseFloat(wCO[10])));
+        dane_CO.add(new Entry(11,Float.parseFloat(wCO[11])));
+        dane_CO.add(new Entry(12,Float.parseFloat(wCO[12])));
+        dane_CO.add(new Entry(13,Float.parseFloat(wCO[13])));
+        dane_CO.add(new Entry(14,Float.parseFloat(wCO[14])));
+        dane_CO.add(new Entry(15,Float.parseFloat(wCO[15])));
+        dane_CO.add(new Entry(16,Float.parseFloat(wCO[16])));
+        dane_CO.add(new Entry(17,Float.parseFloat(wCO[17])));
+        dane_CO.add(new Entry(18,Float.parseFloat(wCO[18])));
+        dane_CO.add(new Entry(19,Float.parseFloat(wCO[19])));
+        dane_CO.add(new Entry(20,Float.parseFloat(wCO[20])));
+        dane_CO.add(new Entry(21,Float.parseFloat(wCO[21])));
+        dane_CO.add(new Entry(22,Float.parseFloat(wCO[22])));
+        dane_CO.add(new Entry(23,Float.parseFloat(wCO[23])));
+
+        LineDataSet wykres_CO = new LineDataSet(dane_CO, "CO");
+        wykres_CO.setColor(Color.BLACK);
+        LineData COLD = new LineData(wykres_CO);
+        wykresCO.setData(COLD);
+        wykresCO.invalidate();
+        wykresCO.setBackgroundColor(Color.WHITE);
+
+        //----------------------------PM2,5----------------------------
+        wPM2 = HPData.getwPM2();
+
+        Description descriptionPM2 = new Description();
+        descriptionPM2.setText("");
+        wykresPM2.setDescription(descriptionPM2);
+        wykresPM2.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxisPM2 = wykresPM2.getXAxis();
+        xAxisPM2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisPM2.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisPM2.setLabelCount(24);
+        xAxisPM2.setGranularity(1f);
+        xAxisPM2.setTextColor(Color.BLACK);
+
+        YAxis yAxisPM2 = wykresPM2.getAxisLeft();
+        yAxisPM2.setAxisLineWidth(2f);
+        yAxisPM2.setAxisLineColor(Color.BLACK);
+
+        List<Entry> dane_PM2 = new ArrayList<>();
+        dane_PM2.add(new Entry(0,Float.parseFloat(wPM2[0])));
+        dane_PM2.add(new Entry(1,Float.parseFloat(wPM2[1])));
+        dane_PM2.add(new Entry(2,Float.parseFloat(wPM2[2])));
+        dane_PM2.add(new Entry(3,Float.parseFloat(wPM2[3])));
+        dane_PM2.add(new Entry(4,Float.parseFloat(wPM2[4])));
+        dane_PM2.add(new Entry(5,Float.parseFloat(wPM2[5])));
+        dane_PM2.add(new Entry(6,Float.parseFloat(wPM2[6])));
+        dane_PM2.add(new Entry(7,Float.parseFloat(wPM2[7])));
+        dane_PM2.add(new Entry(8,Float.parseFloat(wPM2[8])));
+        dane_PM2.add(new Entry(9,Float.parseFloat(wPM2[9])));
+        dane_PM2.add(new Entry(10,Float.parseFloat(wPM2[10])));
+        dane_PM2.add(new Entry(11,Float.parseFloat(wPM2[11])));
+        dane_PM2.add(new Entry(12,Float.parseFloat(wPM2[12])));
+        dane_PM2.add(new Entry(13,Float.parseFloat(wPM2[13])));
+        dane_PM2.add(new Entry(14,Float.parseFloat(wPM2[14])));
+        dane_PM2.add(new Entry(15,Float.parseFloat(wPM2[15])));
+        dane_PM2.add(new Entry(16,Float.parseFloat(wPM2[16])));
+        dane_PM2.add(new Entry(17,Float.parseFloat(wPM2[17])));
+        dane_PM2.add(new Entry(18,Float.parseFloat(wPM2[18])));
+        dane_PM2.add(new Entry(19,Float.parseFloat(wPM2[19])));
+        dane_PM2.add(new Entry(20,Float.parseFloat(wPM2[20])));
+        dane_PM2.add(new Entry(21,Float.parseFloat(wPM2[21])));
+        dane_PM2.add(new Entry(22,Float.parseFloat(wPM2[22])));
+        dane_PM2.add(new Entry(23,Float.parseFloat(wPM2[23])));
+
+        LineDataSet wykres_PM2 = new LineDataSet(dane_PM2, "PM2,5");
+        wykres_PM2.setColor(Color.BLACK);
+        LineData PM2LD = new LineData(wykres_PM2);
+        wykresPM2.setData(PM2LD);
+        wykresPM2.invalidate();
+        wykresPM2.setBackgroundColor(Color.WHITE);
+
+        //----------------------------SO2----------------------------
+        wSO2 = HPData.getwSO2();
+
+        Description descriptionSO2 = new Description();
+        descriptionSO2.setText("");
+        wykresSO2.setDescription(descriptionSO2);
+        wykresSO2.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxisSO2 = wykresSO2.getXAxis();
+        xAxisSO2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisSO2.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisSO2.setLabelCount(24);
+        xAxisSO2.setGranularity(1f);
+        xAxisSO2.setTextColor(Color.BLACK);
+
+        YAxis yAxisSO2 = wykresSO2.getAxisLeft();
+        yAxisSO2.setAxisLineWidth(2f);
+        yAxisSO2.setAxisLineColor(Color.BLACK);
+
+        List<Entry> dane_SO2 = new ArrayList<>();
+        dane_SO2.add(new Entry(0,Float.parseFloat(wSO2[0])));
+        dane_SO2.add(new Entry(1,Float.parseFloat(wSO2[1])));
+        dane_SO2.add(new Entry(2,Float.parseFloat(wSO2[2])));
+        dane_SO2.add(new Entry(3,Float.parseFloat(wSO2[3])));
+        dane_SO2.add(new Entry(4,Float.parseFloat(wSO2[4])));
+        dane_SO2.add(new Entry(5,Float.parseFloat(wSO2[5])));
+        dane_SO2.add(new Entry(6,Float.parseFloat(wSO2[6])));
+        dane_SO2.add(new Entry(7,Float.parseFloat(wSO2[7])));
+        dane_SO2.add(new Entry(8,Float.parseFloat(wSO2[8])));
+        dane_SO2.add(new Entry(9,Float.parseFloat(wSO2[9])));
+        dane_SO2.add(new Entry(10,Float.parseFloat(wSO2[10])));
+        dane_SO2.add(new Entry(11,Float.parseFloat(wSO2[11])));
+        dane_SO2.add(new Entry(12,Float.parseFloat(wSO2[12])));
+        dane_SO2.add(new Entry(13,Float.parseFloat(wSO2[13])));
+        dane_SO2.add(new Entry(14,Float.parseFloat(wSO2[14])));
+        dane_SO2.add(new Entry(15,Float.parseFloat(wSO2[15])));
+        dane_SO2.add(new Entry(16,Float.parseFloat(wSO2[16])));
+        dane_SO2.add(new Entry(17,Float.parseFloat(wSO2[17])));
+        dane_SO2.add(new Entry(18,Float.parseFloat(wSO2[18])));
+        dane_SO2.add(new Entry(19,Float.parseFloat(wSO2[19])));
+        dane_SO2.add(new Entry(20,Float.parseFloat(wSO2[20])));
+        dane_SO2.add(new Entry(21,Float.parseFloat(wSO2[21])));
+        dane_SO2.add(new Entry(22,Float.parseFloat(wSO2[22])));
+        dane_SO2.add(new Entry(23,Float.parseFloat(wSO2[23])));
+
+        LineDataSet wykres_SO2 = new LineDataSet(dane_SO2, "SO2");
+        wykres_SO2.setColor(Color.BLACK);
+        LineData SO2LD = new LineData(wykres_SO2);
+        wykresSO2.setData(SO2LD);
+        wykresSO2.invalidate();
+        wykresSO2.setBackgroundColor(Color.WHITE);
+
+        //----------------------------NO2----------------------------
+        wNO2 = HPData.getwNO2();
+
+        Description descriptionNO2 = new Description();
+        descriptionNO2.setText("");
+        wykresNO2.setDescription(descriptionNO2);
+        wykresNO2.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxisNO2 = wykresNO2.getXAxis();
+        xAxisNO2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisNO2.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisNO2.setLabelCount(24);
+        xAxisNO2.setGranularity(1f);
+        xAxisNO2.setTextColor(Color.BLACK);
+
+        YAxis yAxisNO2 = wykresNO2.getAxisLeft();
+        yAxisNO2.setAxisLineWidth(2f);
+        yAxisNO2.setAxisLineColor(Color.BLACK);
+
+        List<Entry> dane_NO2 = new ArrayList<>();
+        dane_NO2.add(new Entry(0,Float.parseFloat(wNO2[0])));
+        dane_NO2.add(new Entry(1,Float.parseFloat(wNO2[1])));
+        dane_NO2.add(new Entry(2,Float.parseFloat(wNO2[2])));
+        dane_NO2.add(new Entry(3,Float.parseFloat(wNO2[3])));
+        dane_NO2.add(new Entry(4,Float.parseFloat(wNO2[4])));
+        dane_NO2.add(new Entry(5,Float.parseFloat(wNO2[5])));
+        dane_NO2.add(new Entry(6,Float.parseFloat(wNO2[6])));
+        dane_NO2.add(new Entry(7,Float.parseFloat(wNO2[7])));
+        dane_NO2.add(new Entry(8,Float.parseFloat(wNO2[8])));
+        dane_NO2.add(new Entry(9,Float.parseFloat(wNO2[9])));
+        dane_NO2.add(new Entry(10,Float.parseFloat(wNO2[10])));
+        dane_NO2.add(new Entry(11,Float.parseFloat(wNO2[11])));
+        dane_NO2.add(new Entry(12,Float.parseFloat(wNO2[12])));
+        dane_NO2.add(new Entry(13,Float.parseFloat(wNO2[13])));
+        dane_NO2.add(new Entry(14,Float.parseFloat(wNO2[14])));
+        dane_NO2.add(new Entry(15,Float.parseFloat(wNO2[15])));
+        dane_NO2.add(new Entry(16,Float.parseFloat(wNO2[16])));
+        dane_NO2.add(new Entry(17,Float.parseFloat(wNO2[17])));
+        dane_NO2.add(new Entry(18,Float.parseFloat(wNO2[18])));
+        dane_NO2.add(new Entry(19,Float.parseFloat(wNO2[19])));
+        dane_NO2.add(new Entry(20,Float.parseFloat(wNO2[20])));
+        dane_NO2.add(new Entry(21,Float.parseFloat(wNO2[21])));
+        dane_NO2.add(new Entry(22,Float.parseFloat(wNO2[22])));
+        dane_NO2.add(new Entry(23,Float.parseFloat(wNO2[23])));
+
+        LineDataSet wykres_NO2 = new LineDataSet(dane_NO2, "NO2");
+        wykres_NO2.setColor(Color.BLACK);
+        LineData NO2LD = new LineData(wykres_NO2);
+        wykresNO2.setData(NO2LD);
+        wykresNO2.invalidate();
+        wykresNO2.setBackgroundColor(Color.WHITE);
+
+        //----------------------------O3----------------------------
+        wO3 = HPData.getwO3();
+
+        Description descriptionO3 = new Description();
+        descriptionO3.setText("");
+        wykresO3.setDescription(descriptionO3);
+        wykresO3.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxisO3 = wykresO3.getXAxis();
+        xAxisO3.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxisO3.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxisO3.setLabelCount(24);
+        xAxisO3.setGranularity(1f);
+        xAxisO3.setTextColor(Color.BLACK);
+
+        YAxis yAxisO3 = wykresO3.getAxisLeft();
+        yAxisO3.setAxisLineWidth(2f);
+        yAxisO3.setAxisLineColor(Color.BLACK);
+
+        List<Entry> dane_O3 = new ArrayList<>();
+        dane_O3.add(new Entry(0,Float.parseFloat(wO3[0])));
+        dane_O3.add(new Entry(1,Float.parseFloat(wO3[1])));
+        dane_O3.add(new Entry(2,Float.parseFloat(wO3[2])));
+        dane_O3.add(new Entry(3,Float.parseFloat(wO3[3])));
+        dane_O3.add(new Entry(4,Float.parseFloat(wO3[4])));
+        dane_O3.add(new Entry(5,Float.parseFloat(wO3[5])));
+        dane_O3.add(new Entry(6,Float.parseFloat(wO3[6])));
+        dane_O3.add(new Entry(7,Float.parseFloat(wO3[7])));
+        dane_O3.add(new Entry(8,Float.parseFloat(wO3[8])));
+        dane_O3.add(new Entry(9,Float.parseFloat(wO3[9])));
+        dane_O3.add(new Entry(10,Float.parseFloat(wO3[10])));
+        dane_O3.add(new Entry(11,Float.parseFloat(wO3[11])));
+        dane_O3.add(new Entry(12,Float.parseFloat(wO3[12])));
+        dane_O3.add(new Entry(13,Float.parseFloat(wO3[13])));
+        dane_O3.add(new Entry(14,Float.parseFloat(wO3[14])));
+        dane_O3.add(new Entry(15,Float.parseFloat(wO3[15])));
+        dane_O3.add(new Entry(16,Float.parseFloat(wO3[16])));
+        dane_O3.add(new Entry(17,Float.parseFloat(wO3[17])));
+        dane_O3.add(new Entry(18,Float.parseFloat(wO3[18])));
+        dane_O3.add(new Entry(19,Float.parseFloat(wO3[19])));
+        dane_O3.add(new Entry(20,Float.parseFloat(wO3[20])));
+        dane_O3.add(new Entry(21,Float.parseFloat(wO3[21])));
+        dane_O3.add(new Entry(22,Float.parseFloat(wO3[22])));
+        dane_O3.add(new Entry(23,Float.parseFloat(wO3[23])));
+
+        LineDataSet wykres_O3 = new LineDataSet(dane_O3, "O3");
+        wykres_O3.setColor(Color.BLACK);
+        LineData O3LD = new LineData(wykres_O3);
+        wykresO3.setData(O3LD);
+        wykresO3.invalidate();
+        wykresO3.setBackgroundColor(Color.WHITE);
     }
 }

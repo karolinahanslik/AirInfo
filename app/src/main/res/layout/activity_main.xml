@@ -580,7 +580,7 @@
                     app:layout_constraintTop_toBottomOf="@id/WykresP10_CardView" />
 
                 <!--        CO wykres-->
-                <androidx.cardview.widget.CardView
+                <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/WykresCOCardView"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -591,20 +591,20 @@
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
                     app:layout_constraintTop_toBottomOf="@id/NazwaCO">
 
-                </androidx.cardview.widget.CardView>
+                </com.github.mikephil.charting.charts.LineChart>
 
                 <TextView
                     android:id="@+id/NazwaPm2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Wykres zmiany Wartości PM2,5"
+                    android:text="Wykres zmiany wartości PM2,5"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresCOCardView" />
 
                 <!--        PM2,5 wykres-->
-                <androidx.cardview.widget.CardView
+                <com.github.mikephil.charting.charts.LineChart
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="20dp"
@@ -615,19 +615,19 @@
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
                     app:layout_constraintTop_toBottomOf="@id/NazwaPm2">
 
-                </androidx.cardview.widget.CardView>
+                </com.github.mikephil.charting.charts.LineChart>
                 <TextView
                     android:id="@+id/NazwaSO2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Wykres zmiany Wartości SO2"
+                    android:text="Wykres zmiany wartości SO2"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresPM2CardView" />
 
                 <!--        SO2 wykres-->
-                <androidx.cardview.widget.CardView
+                <com.github.mikephil.charting.charts.LineChart
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="20dp"
@@ -638,19 +638,19 @@
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
                     app:layout_constraintTop_toBottomOf="@id/NazwaSO2">
 
-                </androidx.cardview.widget.CardView>
+                </com.github.mikephil.charting.charts.LineChart>
                 <TextView
                     android:id="@+id/NazwaNO2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Wykres zmiany Wartości NO2"
+                    android:text="Wykres zmiany wartości NO2"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresSO2CardView" />
 
                 <!--        NO2 wykres-->
-                <androidx.cardview.widget.CardView
+                <com.github.mikephil.charting.charts.LineChart
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="20dp"
@@ -661,19 +661,19 @@
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
                     app:layout_constraintTop_toBottomOf="@id/NazwaNO2">
 
-                </androidx.cardview.widget.CardView>
+                </com.github.mikephil.charting.charts.LineChart>
                 <TextView
                     android:id="@+id/NazwaO3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Wykres zmiany Wartości O3"
+                    android:text="Wykres zmiany wartości O3"
                     android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/Leftguideline2"
                     app:layout_constraintTop_toBottomOf="@id/WykresNO2CardView" />
 
                 <!--        O3 wykres-->
-                <androidx.cardview.widget.CardView
+                <com.github.mikephil.charting.charts.LineChart
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="20dp"
@@ -684,7 +684,7 @@
                     app:layout_constraintRight_toRightOf="@id/Rightguideline2"
                     app:layout_constraintTop_toBottomOf="@id/NazwaO3">
 
-                </androidx.cardview.widget.CardView>
+                </com.github.mikephil.charting.charts.LineChart>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

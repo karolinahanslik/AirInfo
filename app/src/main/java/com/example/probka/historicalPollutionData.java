@@ -8,15 +8,12 @@ import java.util.List;
 
 public class historicalPollutionData {
 
-    //float[] wPM10 = new float[24];
     String[] wPM10 = new String[24];
-    //String wPM10;
     String[] wPM2 = new String[24];
     String[] wCO = new String[24];
     String[] wSO2 = new String[24];
     String[] wNO2 = new String[24];
     String[] wO3 = new String[24];
-    //private String mIcon, mCO, mPM10, mPM2, mSO2, mNO2, mO3;
     private double mCondition;
 
 
