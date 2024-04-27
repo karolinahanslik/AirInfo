@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,32 +23,60 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.security.KeyStore;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "KEY";
+    final String API = "KEY1";
     final String API2 = "KEY2";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
     final String CityName_URL = "http://api.openweathermap.org/data/2.5/weather";
+
+    final String Historical_Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution/history";
 
     final String CityKey_URL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search";
 
     final long MIN_TIME = 5000;
     final float MIN_DISTANCE = 1000;
     final int REQUEST_CODE = 101;
+
+    long currentEpochTime, pastEpochTime;
+
+    private LineChart wykresPM10;
+    private List<String> xValues;
+
+    String[] wPM10 = new String[24];
+    String[] wPM2 = new String[24];
+    String[] wCO = new String[24];
+    String[] wSO2 = new String[24];
+    String[] wNO2 = new String[24];
+    String[] wO3 = new String[24];
 
     String Location_Provider = LocationManager.GPS_PROVIDER;
 
@@ -121,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
         cityName = (TextView) findViewById(R.id.CityName);
         mCityFinder = findViewById(R.id.Localization);
         Data_Godzina = findViewById(R.id.DateHour);
+
+        wykresPM10 = findViewById(R.id.WykresP10_CardView);
 
         PM10Dialog.setContentView(R.layout.pm10_layout);
         PM2Dialog.setContentView(R.layout.pm2_layout);
@@ -370,6 +401,9 @@ public class MainActivity extends AppCompatActivity {
                 String Latitude = String.valueOf(location.getLatitude());
                 String Longitude = String.valueOf(location.getLongitude());
 
+                latitude = Latitude;
+                longitude = Longitude;
+
                 RequestParams params = new RequestParams();
                 params.put("lat", Latitude);
                 params.put("lon", Longitude);
@@ -469,6 +503,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        //tutaj dodac blok o pobieraniu wykresow
     }
 
     private void letsdoMoreNetworking(RequestParams params)
@@ -546,11 +581,37 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void letsgetHData(RequestParams params)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Historical_Pollution_URL, params, new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        //Toast.makeText(MainActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                        historicalPollutionData HPData = historicalPollutionData.fromJson(response);
+                        updateWykresy(HPData);
+                        //super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        //super.onFailure(statusCode, headers, throwable, errorResponse);
+                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
     private void updateUI(pollutionData pollution)
     {
         CO_TextView.setText(pollution.getmCO());
         PM10_TextView.setText(pollution.getmPM10());
         PM2_TextView.setText(pollution.getmPM2());
+        SO2_TextView.setText(pollution.getmSO2());
+        NO2_TextView.setText(pollution.getmNO2());
+        O3_TextView.setText(pollution.getmO3());
         int resourceID = getResources().getIdentifier(pollution.getmIcon(), "drawable", getPackageName());
     }
 
@@ -570,6 +631,24 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
         String date = formatter.format(today);
         Data_Godzina.setText(date);
+
+        //epoch time
+        // Pobieranie aktualnej daty
+        Date currentDate = new Date();
+
+        // Zamiana daty na czas Epoch (w milisekundach)
+        currentEpochTime = System.currentTimeMillis() / 1000L;
+
+        // Data sprzed 24h
+        pastEpochTime = currentEpochTime - 82800;
+
+        RequestParams params = new RequestParams();
+        params.put("lat", latitude);
+        params.put("lon", longitude);
+        params.put("appid", API);
+        params.put("start", pastEpochTime);
+        params.put("end", currentEpochTime);
+        letsgetHData(params);
     }
 
     private void updateLL(coordsData coordsD)
@@ -596,5 +675,94 @@ public class MainActivity extends AppCompatActivity {
         {
             mLocationManager.removeUpdates(mLocationListener);
         }
+    }
+    private void updateWykresy(historicalPollutionData HPData)
+    {
+        //String test = HPData.getwPM10(); //dziala
+        wPM10 = HPData.getwPM10();
+
+        //dane z API
+        xValues = Arrays.asList("23h", "", "", "", "19h", "", "", "", "15h", "", "", "", "11h", "", "", "", "7h", "", "", "", "3h", "", "", "Teraz");
+
+        Description description = new Description();
+        description.setText("");
+        wykresPM10.setDescription(description);
+        wykresPM10.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxis = wykresPM10.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
+        xAxis.setLabelCount(24);
+        xAxis.setGranularity(1f);
+        xAxis.setTextColor(Color.BLACK);
+
+        YAxis yAxis = wykresPM10.getAxisLeft();
+        //yAxis.setAxisMinimum(0f);
+        //yAxis.setAxisMaximum(100f);
+        yAxis.setAxisLineWidth(2f);
+        yAxis.setAxisLineColor(Color.BLACK);
+        //yAxis.setLabelCount(10);
+
+        List<Entry> dane_PM10 = new ArrayList<>();
+        dane_PM10.add(new Entry(0, 1));
+        dane_PM10.add(new Entry(1, 3));
+        dane_PM10.add(new Entry(2, 7));
+        dane_PM10.add(new Entry(3, 5));
+        dane_PM10.add(new Entry(4, 7));
+        dane_PM10.add(new Entry(5, 1));
+        dane_PM10.add(new Entry(6, 3));
+        dane_PM10.add(new Entry(7, 7));
+        dane_PM10.add(new Entry(8, 5));
+        dane_PM10.add(new Entry(9, 7));
+        dane_PM10.add(new Entry(10, 1));
+        dane_PM10.add(new Entry(11, 3));
+        dane_PM10.add(new Entry(12, 7));
+        dane_PM10.add(new Entry(13, 5));
+        dane_PM10.add(new Entry(14, 7));
+        dane_PM10.add(new Entry(15, 1));
+        dane_PM10.add(new Entry(16, 3));
+        dane_PM10.add(new Entry(17, 7));
+        dane_PM10.add(new Entry(18, 5));
+        dane_PM10.add(new Entry(19, 7));
+        dane_PM10.add(new Entry(20, 1));
+        dane_PM10.add(new Entry(21, 3));
+        dane_PM10.add(new Entry(22, 7));
+        dane_PM10.add(new Entry(23, 5));
+        /*
+        dane_PM10.add(new Entry(0,Float.parseFloat(wPM10[0])));
+        dane_PM10.add(new Entry(1,Float.parseFloat(wPM10[1])));
+        dane_PM10.add(new Entry(2,Float.parseFloat(wPM10[2])));
+        dane_PM10.add(new Entry(3,Float.parseFloat(wPM10[3])));
+        dane_PM10.add(new Entry(4,Float.parseFloat(wPM10[4])));
+        dane_PM10.add(new Entry(5,Float.parseFloat(wPM10[5])));
+        dane_PM10.add(new Entry(6,Float.parseFloat(wPM10[6])));
+        dane_PM10.add(new Entry(7,Float.parseFloat(wPM10[7])));
+        dane_PM10.add(new Entry(8,Float.parseFloat(wPM10[8])));
+        dane_PM10.add(new Entry(9,Float.parseFloat(wPM10[9])));
+        dane_PM10.add(new Entry(10,Float.parseFloat(wPM10[10])));
+        dane_PM10.add(new Entry(11,Float.parseFloat(wPM10[11])));
+        dane_PM10.add(new Entry(12,Float.parseFloat(wPM10[12])));
+        dane_PM10.add(new Entry(13,Float.parseFloat(wPM10[13])));
+        dane_PM10.add(new Entry(14,Float.parseFloat(wPM10[14])));
+        dane_PM10.add(new Entry(15,Float.parseFloat(wPM10[15])));
+        dane_PM10.add(new Entry(16,Float.parseFloat(wPM10[16])));
+        dane_PM10.add(new Entry(17,Float.parseFloat(wPM10[17])));
+        dane_PM10.add(new Entry(18,Float.parseFloat(wPM10[18])));
+        dane_PM10.add(new Entry(19,Float.parseFloat(wPM10[19])));
+        dane_PM10.add(new Entry(20,Float.parseFloat(wPM10[20])));
+        dane_PM10.add(new Entry(21,Float.parseFloat(wPM10[21])));
+        dane_PM10.add(new Entry(22,Float.parseFloat(wPM10[22])));
+        dane_PM10.add(new Entry(23,Float.parseFloat(wPM10[23])));
+        */
+
+        LineDataSet wykres_PM10 = new LineDataSet(dane_PM10, "PM10");
+        wykres_PM10.setColor(Color.BLACK);
+
+        LineData PM10LD = new LineData(wykres_PM10);
+
+        wykresPM10.setData(PM10LD);
+
+        wykresPM10.invalidate();
+        wykresPM10.setBackgroundColor(Color.WHITE);
     }
 }
