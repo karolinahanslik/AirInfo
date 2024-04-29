@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 Toast.makeText(MainActivity.this, "Nie udało się pobrać lokalizacji.", Toast.LENGTH_SHORT).show();
-                //user denied the permission
+                //user denied the permission current
 
             }
         }
@@ -505,6 +505,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
                         Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+
                     }
                 }
         );
@@ -533,7 +534,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         //super.onFailure(statusCode, headers, throwable, errorResponse);
-                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Niepoprawna nazwa miasta. Wyszukano wartości dla obecnej lokalizacji.", Toast.LENGTH_SHORT).show();
+                        getPollutionforCurrentLocation();
+                        getCurrentLocationKey();
                     }
                 }
         );
