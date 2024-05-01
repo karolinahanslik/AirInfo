@@ -324,10 +324,11 @@
 
                         <!--        PM10 odniesienie do normy-->
                         <TextView
+                            android:id="@+id/PM10_Norma"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="--%"
+                            android:text="--"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/PM10_TextView"
                             app:layout_constraintStart_toStartOf="@+id/PM10_TextView"
@@ -399,10 +400,11 @@
 
                         <!--        CO odniesienie do normy-->
                         <TextView
+                            android:id="@+id/CO_Norma"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="--%"
+                            android:text="--"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/CO_TextView"
                             app:layout_constraintStart_toStartOf="@+id/CO_TextView"
@@ -418,10 +420,11 @@
 
                         <!--        PM2,5 odniesienie do normy-->
                         <TextView
+                            android:id="@+id/PM2_Norma"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="90dp"
-                            android:text="--%"
+                            android:text="--"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/PM2_TextView"
                             app:layout_constraintStart_toStartOf="@+id/PM2_TextView"
@@ -457,7 +460,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/SO2_Norma"
                             android:layout_marginTop="10dp"
-                            android:text="--%"
+                            android:text="--"
                             android:textColor="@color/white"
                             app:layout_constraintTop_toBottomOf="@id/SO2_TextView"
                             app:layout_constraintStart_toStartOf="@id/SO2_TextView"
@@ -493,7 +496,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/NO2_Norma"
-                            android:text="--%"
+                            android:text="--"
                             android:layout_marginBottom="10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:textColor="@color/white"
@@ -532,7 +535,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/O3_Norma"
-                            android:text="--%"
+                            android:text="--"
                             android:layout_marginBottom="10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:textColor="@color/white"
@@ -758,8 +761,8 @@
                         <!--        trawa wartosc z API-->
                         <TextView
                             android:id="@+id/TrawaTextView"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="20dp"
                             android:background="@drawable/smog_style"
@@ -790,7 +793,7 @@
                             android:layout_marginLeft="90dp"
                             android:layout_marginTop="30dp"
                             app:layout_constraintStart_toEndOf="@id/TrawaTextView"
-                            android:text="Wysokie"
+                            android:text="--"
                             />
 
                         <TextView
@@ -807,8 +810,8 @@
                         <!--        plesn wartosc z API-->
                         <TextView
                             android:id="@+id/PlesnTextView"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="45dp"
                             android:background="@drawable/smog_style"
@@ -838,7 +841,7 @@
                             android:layout_marginLeft="90dp"
                             android:layout_marginTop="30dp"
                             app:layout_constraintStart_toEndOf="@id/PlesnTextView"
-                            android:text="Wysokie"
+                            android:text="--"
                             />
 
                         <TextView
@@ -854,8 +857,8 @@
                         <!--        drzewa wartosc z API-->
                         <TextView
                             android:id="@+id/DrzewaTextView"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="45dp"
                             android:background="@drawable/smog_style"
@@ -885,7 +888,7 @@
                             android:layout_marginLeft="90dp"
                             android:layout_marginTop="30dp"
                             app:layout_constraintStart_toEndOf="@id/DrzewaTextView"
-                            android:text="Wysokie"
+                            android:text="--"
                             />
 
                         <TextView
@@ -901,8 +904,8 @@
                         <!--        ambrozja wartosc z API-->
                         <TextView
                             android:id="@+id/AmbrozjaTextView"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="45dp"
                             android:background="@drawable/smog_style"
@@ -932,59 +935,13 @@
                             android:layout_marginLeft="90dp"
                             android:layout_marginTop="30dp"
                             app:layout_constraintStart_toEndOf="@id/AmbrozjaTextView"
-                            android:text="Wysokie"
+                            android:text="--"
                             />
 
 
 
 
-                        <!--        trawa ocena pylki-->
-                        <TextView
-                            android:id="@+id/TrawaPoziomTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="--%"
-                            android:textSize="20dp"
-                            android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/TrawaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/TrawaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/TrawaTextView" />
 
-                        <!--        plesn ocena pylki-->
-                        <TextView
-                            android:id="@+id/PlesnPoziomTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="--%"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            app:layout_constraintEnd_toEndOf="@+id/PlesnTextView"
-                            app:layout_constraintStart_toStartOf="@+id/PlesnTextView"
-                            app:layout_constraintTop_toBottomOf="@id/PlesnTextView" />
-
-                        <!--        dac ocena pylki-->
-                        <TextView
-                            android:id="@+id/DrzewaPoziomTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="--%"
-                            android:textSize="20dp"
-                            android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/DrzewaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/DrzewaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/DrzewaTextView" />
-
-                        <!--        ambrozja ocena pylki-->
-                        <TextView
-                            android:id="@+id/AmbrozjaPoziomTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="--%"
-                            android:textSize="20dp"
-                            android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/AmbrozjaTextView"
-                            app:layout_constraintStart_toStartOf="@+id/AmbrozjaTextView"
-                            app:layout_constraintTop_toBottomOf="@id/AmbrozjaTextView" />
 
 
 

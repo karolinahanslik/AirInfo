@@ -36,6 +36,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.security.KeyStore;
 import java.text.SimpleDateFormat;
@@ -77,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
     String[] wSO2 = new String[24];
     String[] wNO2 = new String[24];
     String[] wO3 = new String[24];
+
+    TextView ocenaSO2, ocenaNO2, ocenaPM10, ocenaPM2, ocenaO3, ocenaCO;
+
+    TextView ocenaTrawa, ocenaPlesn, ocenaDrzewa, ocenaAmbrozja;
 
     String Location_Provider = LocationManager.GPS_PROVIDER;
 
@@ -169,6 +174,19 @@ public class MainActivity extends AppCompatActivity {
         plesn_TextView = findViewById(R.id.PlesnTextView);
         drzewa_TextView = findViewById(R.id.DrzewaTextView);
         ambrozja_TextView = findViewById(R.id.AmbrozjaTextView);
+
+        ocenaSO2 = findViewById(R.id.SO2_Norma);
+        ocenaNO2 = findViewById(R.id.NO2_Norma);
+        ocenaO3 = findViewById(R.id.O3_Norma);
+        ocenaPM10 = findViewById(R.id.PM10_Norma);
+        ocenaPM2 = findViewById(R.id.PM2_Norma);
+        ocenaCO = findViewById(R.id.CO_Norma);
+
+        ocenaTrawa = findViewById(R.id.stezenieTrawy);
+        ocenaPlesn = findViewById(R.id.stezeniePlesn);
+        ocenaDrzewa = findViewById(R.id.stezenieDrzewa);
+        ocenaAmbrozja = findViewById(R.id.stezenieAmbrozja);
+
 
         mCityFinder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
     {
         RequestParams params = new RequestParams();
         params.put("apikey", API2);
-        //params.put("language", "pl-pl");
+        params.put("language", "pl-pl");
         params.put("details", "true");
         params.put("metric", "false");
         letsdoEvenMoreNetworking(params);
@@ -620,7 +638,13 @@ public class MainActivity extends AppCompatActivity {
         SO2_TextView.setText(pollution.getmSO2());
         NO2_TextView.setText(pollution.getmNO2());
         O3_TextView.setText(pollution.getmO3());
-        int resourceID = getResources().getIdentifier(pollution.getmIcon(), "drawable", getPackageName());
+
+        ocenaCO.setText(pollution.getM_ocenaCO());
+        ocenaSO2.setText(pollution.getM_ocenaSO2());
+        ocenaNO2.setText(pollution.getM_ocenaNO2());
+        ocenaO3.setText(pollution.getM_ocenaO3());
+        ocenaPM10.setText(pollution.getM_ocenaPM10());
+        ocenaPM2.setText(pollution.getM_ocenaPM2());
     }
 
     private void updatePOL(pollenData pollen)
@@ -629,7 +653,11 @@ public class MainActivity extends AppCompatActivity {
         plesn_TextView.setText(pollen.getmPlesn());
         drzewa_TextView.setText(pollen.getmDrzewa());
         ambrozja_TextView.setText(pollen.getmAmbrozja());
-        //int resourceID = getResources().getIdentifier(pollen.getmIcon(), "drawable", getPackageName());
+
+        ocenaTrawa.setText(pollen.getM_ocenaTrawa());
+        ocenaPlesn.setText(pollen.getM_ocenaPlesn());
+        ocenaDrzewa.setText(pollen.getM_ocenaDrzewa());
+        ocenaAmbrozja.setText(pollen.getM_ocenaAmbrozja());
     }
 
     private void updateCN(cityNameData cityNameD)
