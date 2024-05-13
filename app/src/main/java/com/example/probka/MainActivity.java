@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.Random;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,8 +53,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "KEY1";
-    final String API2 = "KEY2";
+    final String API = "dc94dfa0079ac3bf956a89f5f6b56d81";
+    final String API2 = "diRwEkAhBO0etCjoHpEf9C4gbh68sKGN";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
     final String CityName_URL = "http://api.openweathermap.org/data/2.5/weather";
@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     private LineChart wykresPM10, wykresCO, wykresPM2, wykresSO2, wykresNO2, wykresO3;
     private List<String> xValues;
-
+String pylenie;
+String pylenieText;
     String[] wPM10 = new String[24];
     String[] wPM2 = new String[24];
     String[] wCO = new String[24];
@@ -89,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     String final_keyData;
 
-    //final String Pollen_URL = String.join("", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
-
+   // final String Pollen_URL = String.join("diRwEkAhBO0etCjoHpEf9C4gbh68sKGN", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
+    String[] porady= new String[]{"Aby zadbać o układ oddechowy unikaj palenia papierosów", "Aby zadbać o układ oddechowy, dbaj o jakość powietrza w domu", "Aby dbać o układ oddechowy ćwicz regularnie","Aby dbac o układ oddechowy zebezpiecz się maską przed smogiem"};
     RelativeLayout mCityFinder;
     TextView cityName;
     TextView PM10_TextView;
@@ -115,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
     CardView HomeCardView;
     CardView SmogCardView;
+    TextView SmogTextView;
+    TextView PoradyTextView;
+    TextView PylkiTextView;
     ImageButton PM10ExitButton;
     ImageButton PM2ExitButton;
     ImageButton COExitButton;
@@ -128,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     Dialog NO2Dialog;
     Dialog O3Dialog;
     CardView PylkiCardView;
+    String smogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
         SO2_TextView=(TextView)  findViewById(R.id.SO2_TextView);
         NO2_TextView=(TextView)  findViewById(R.id.NO2_TextView);
         O3_TextView=(TextView)  findViewById(R.id.O3_TextView);
+        SmogTextView=(TextView) findViewById(R.id.SmogTextView);
+        PylkiTextView=(TextView) findViewById(R.id.PylkiTextView);
+        PoradyTextView=(TextView) findViewById(R.id.PoradyTextView);
         HomeCardView = (CardView) findViewById(R.id.HomeCardView);
         SmogCardView = (CardView) findViewById(R.id.SmogCardView);
         PylkiCardView = (CardView) findViewById(R.id.PylkiCardView);
@@ -176,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
         ambrozja_TextView = findViewById(R.id.AmbrozjaTextView);
 
         ocenaSO2 = findViewById(R.id.SO2_Norma);
+
         ocenaNO2 = findViewById(R.id.NO2_Norma);
         ocenaO3 = findViewById(R.id.O3_Norma);
         ocenaPM10 = findViewById(R.id.PM10_Norma);
@@ -346,6 +355,10 @@ public class MainActivity extends AppCompatActivity {
             getPollutionforCurrentLocation();
             getCurrentLocationKey();
         }
+        Random random = new Random();
+
+        int liczba = random.nextInt(4) ;
+        PoradyTextView.setText(porady[liczba]);
     }
 
     private void getPollutionforNewCity(String city)
@@ -632,6 +645,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(pollutionData pollution)
     {
+
         CO_TextView.setText(pollution.getmCO());
         PM10_TextView.setText(pollution.getmPM10());
         PM2_TextView.setText(pollution.getmPM2());
@@ -640,24 +654,183 @@ public class MainActivity extends AppCompatActivity {
         O3_TextView.setText(pollution.getmO3());
 
         ocenaCO.setText(pollution.getM_ocenaCO());
+        if(ocenaCO.getText()=="Dobre")
+        {
+            ocenaCO.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaCO.getText()=="Poprawne") {
+            ocenaCO.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaCO.getText()=="Umiarkowane") {
+            ocenaCO.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaCO.getText()=="Złe") {
+            ocenaCO.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaCO.getText()=="Bardzo złe") {
+            ocenaCO.setTextColor(Color.parseColor("#990000"));
+        }
+
         ocenaSO2.setText(pollution.getM_ocenaSO2());
+        if(ocenaSO2.getText()=="Dobre")
+        {
+            ocenaSO2.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaSO2.getText()=="Poprawne") {
+            ocenaSO2.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaSO2.getText()=="Umiarkowane") {
+            ocenaSO2.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaSO2.getText()=="Złe") {
+            ocenaSO2.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaSO2.getText()=="Bardzo złe") {
+            ocenaSO2.setTextColor(Color.parseColor("#990000"));
+        }
         ocenaNO2.setText(pollution.getM_ocenaNO2());
+
+        if(ocenaNO2.getText()=="Dobre")
+        {
+            ocenaNO2.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaNO2.getText()=="Poprawne") {
+            ocenaNO2.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaNO2.getText()=="Umiarkowane") {
+            ocenaNO2.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaNO2.getText()=="Złe") {
+            ocenaNO2.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaNO2.getText()=="Bardzo złe") {
+            ocenaNO2.setTextColor(Color.parseColor("#990000"));
+        }
+
         ocenaO3.setText(pollution.getM_ocenaO3());
+
+        if(ocenaO3.getText()=="Dobre")
+        {
+            ocenaO3.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaO3.getText()=="Poprawne") {
+            ocenaO3.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaO3.getText()=="Umiarkowane") {
+            ocenaO3.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaO3.getText()=="Złe") {
+            ocenaNO2.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaNO2.getText()=="Bardzo złe") {
+            ocenaNO2.setTextColor(Color.parseColor("#990000"));
+        }
         ocenaPM10.setText(pollution.getM_ocenaPM10());
+        if(ocenaPM10.getText()=="Dobre")
+        {
+            ocenaPM10.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaPM10.getText()=="Poprawne") {
+            ocenaPM10.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaPM10.getText()=="Umiarkowane") {
+            ocenaPM10.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaPM10.getText()=="Złe") {
+            ocenaPM10.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaPM10.getText()=="Bardzo złe") {
+            ocenaPM10.setTextColor(Color.parseColor("#990000"));
+        }
         ocenaPM2.setText(pollution.getM_ocenaPM2());
+        if(ocenaPM2.getText()=="Dobre")
+        {
+            ocenaPM2.setTextColor(Color.parseColor("#66FF33"));
+        } else if (ocenaPM2.getText()=="Poprawne") {
+            ocenaPM2.setTextColor(Color.parseColor("#99CC33"));
+        } else if (ocenaPM2.getText()=="Umiarkowane") {
+            ocenaPM2.setTextColor(Color.parseColor("#CCCC33"));
+        } else if (ocenaPM2.getText()=="Złe") {
+            ocenaPM2.setTextColor(Color.parseColor("#FF3300"));
+        } else if (ocenaPM2.getText()=="Bardzo złe") {
+            ocenaPM2.setTextColor(Color.parseColor("#990000"));
+        }
+        if((pollution.getM_ocenaPM2()=="Złe" || pollution.getM_ocenaPM2()=="Bardzo złe") &&(pollution.getM_ocenaPM10()=="Złe"||pollution.getM_ocenaPM10()=="Bardzo złe") )
+        {
+            smogText="Dzisiaj w "+cityName.getText()+" jest zła jakość powietrza, nie wychodź z domu jeśli to możliwe";
+            SmogTextView.setText(smogText);
+        } else if ((pollution.getM_ocenaPM2()=="Dobre"||pollution.getM_ocenaPM2()=="Poprawne"||pollution.getM_ocenaPM2()=="Umiarkowane")&&(pollution.getM_ocenaPM10()=="Dobre"||pollution.getM_ocenaPM10()=="Poprawne"||pollution.getM_ocenaPM10()=="Umiarkowane")) {
+            smogText="Dzisiaj w "+cityName.getText()+" jest dobra jakość powietrza";
+            SmogTextView.setText(smogText);
+        }
+        else {
+            smogText="Dzisiaj w "+cityName.getText()+" jest średnia jakość powietrza";
+            SmogTextView.setText(smogText);
+        }
+
     }
 
     private void updatePOL(pollenData pollen)
     {
+
         trawa_TextView.setText(pollen.getmTrawa());
         plesn_TextView.setText(pollen.getmPlesn());
         drzewa_TextView.setText(pollen.getmDrzewa());
         ambrozja_TextView.setText(pollen.getmAmbrozja());
 
         ocenaTrawa.setText(pollen.getM_ocenaTrawa());
+        if(pollen.getM_ocenaTrawa().contains("Dobre"))
+        {
+            ocenaTrawa.setTextColor(Color.parseColor("#66FF33"));
+        } else if (pollen.getM_ocenaTrawa().contains("Średnie")) {
+            ocenaTrawa.setTextColor(Color.parseColor("#FF9933"));
+        } else if (pollen.getM_ocenaTrawa().contains("Szkodliwe"))  {
+            ocenaTrawa.setTextColor(Color.parseColor("#CC0000"));
+        }
         ocenaPlesn.setText(pollen.getM_ocenaPlesn());
+        if(pollen.getM_ocenaPlesn().contains("Dobre"))
+        {
+            ocenaPlesn.setTextColor(Color.parseColor("#66FF33"));
+        } else if (pollen.getM_ocenaPlesn().contains("Średnie")) {
+            ocenaPlesn.setTextColor(Color.parseColor("#FF9933"));
+        } else if (pollen.getM_ocenaPlesn().contains("Szkodliwe"))  {
+            ocenaPlesn.setTextColor(Color.parseColor("#CC0000"));
+        }
         ocenaDrzewa.setText(pollen.getM_ocenaDrzewa());
+        if(pollen.getM_ocenaDrzewa().contains("Dobre"))
+        {
+            ocenaDrzewa.setTextColor(Color.parseColor("#66FF33"));
+        } else if (pollen.getM_ocenaDrzewa().contains("Średnie")) {
+            ocenaDrzewa.setTextColor(Color.parseColor("#FF9933"));
+        } else if (pollen.getM_ocenaDrzewa().contains("Szkodliwe"))  {
+            ocenaDrzewa.setTextColor(Color.parseColor("#CC0000"));
+        }
         ocenaAmbrozja.setText(pollen.getM_ocenaAmbrozja());
+        if(pollen.getM_ocenaAmbrozja().contains("Dobre"))
+        {
+            ocenaAmbrozja.setTextColor(Color.parseColor("#66FF33"));
+        } else if (pollen.getM_ocenaAmbrozja().contains("Średnie")) {
+            ocenaAmbrozja.setTextColor(Color.parseColor("#FF9933"));
+        } else if (pollen.getM_ocenaAmbrozja().contains("Szkodliwe"))  {
+            ocenaAmbrozja.setTextColor(Color.parseColor("#CC0000"));
+        }
+        pylenie="";
+        if(pollen.getM_ocenaAmbrozja().contains("Średnie")||pollen.getM_ocenaAmbrozja().contains("Szkodliwe"))
+        {
+            pylenie="ambrozja";
+
+        }
+        if(pollen.getM_ocenaDrzewa().contains("Szkodliwe")||pollen.getM_ocenaDrzewa().contains("Średnie"))
+        {
+            if(pylenie=="")
+            {
+                pylenie="drzewa";
+            }
+            else{
+                pylenie=pylenie+", drzewa";
+            }
+
+        }
+        if(pollen.getM_ocenaPlesn().contains("Średnie")||pollen.getM_ocenaPlesn().contains("Szkodliwe")){
+            if(pylenie=="")
+            {
+                pylenie="pleśń";
+            }
+            else{
+                pylenie=pylenie+", pleśń";
+            }
+
+        }
+        if(pollen.getM_ocenaTrawa().contains("Średnie")||pollen.getM_ocenaTrawa().contains("Szkodliwe"))
+        {
+            if(pylenie=="")
+            {
+                pylenie="trawa";
+            }
+            pylenie=pylenie+", trawa";
+        }
+        pylenieText="Dzisiaj w "+cityName.getText()+" pylą: "+pylenie;
+        PylkiTextView.setText(pylenieText);
     }
 
     private void updateCN(cityNameData cityNameD)
