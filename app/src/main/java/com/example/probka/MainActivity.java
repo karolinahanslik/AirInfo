@@ -53,8 +53,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String API = "dc94dfa0079ac3bf956a89f5f6b56d81";
-    final String API2 = "diRwEkAhBO0etCjoHpEf9C4gbh68sKGN";
+    final String API = "KEY1";
+    final String API2 = "KEY2";
     final String Pollution_URL = "http://api.openweathermap.org/data/2.5/air_pollution";
 
     final String CityName_URL = "http://api.openweathermap.org/data/2.5/weather";
@@ -90,7 +90,7 @@ String pylenieText;
 
     String final_keyData;
 
-   // final String Pollen_URL = String.join("diRwEkAhBO0etCjoHpEf9C4gbh68sKGN", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
+   // final String Pollen_URL = String.join("", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
     String[] porady= new String[]{"Aby zadbać o układ oddechowy unikaj palenia papierosów", "Aby zadbać o układ oddechowy, dbaj o jakość powietrza w domu", "Aby dbać o układ oddechowy ćwicz regularnie","Aby dbac o układ oddechowy zebezpiecz się maską przed smogiem"};
     RelativeLayout mCityFinder;
     TextView cityName;
