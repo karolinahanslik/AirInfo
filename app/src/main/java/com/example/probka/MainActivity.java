@@ -90,6 +90,8 @@ String pylenieText;
 
     String final_keyData;
 
+    String zmienna;
+
    // final String Pollen_URL = String.join("", "http://dataservice.accuweather.com/forecasts/v1/daily/1day/", final_keyData);
     String[] porady= new String[]{"Aby zadbać o układ oddechowy unikaj palenia papierosów", "Aby zadbać o układ oddechowy, dbaj o jakość powietrza w domu", "Aby dbać o układ oddechowy ćwicz regularnie","Aby dbac o układ oddechowy zebezpiecz się maską przed smogiem"};
     RelativeLayout mCityFinder;
@@ -737,13 +739,16 @@ String pylenieText;
         }
         if((pollution.getM_ocenaPM2()=="Złe" || pollution.getM_ocenaPM2()=="Bardzo złe") &&(pollution.getM_ocenaPM10()=="Złe"||pollution.getM_ocenaPM10()=="Bardzo złe") )
         {
+            zmienna = "zła";
             smogText="Dzisiaj w "+cityName.getText()+" jest zła jakość powietrza, nie wychodź z domu jeśli to możliwe";
             SmogTextView.setText(smogText);
         } else if ((pollution.getM_ocenaPM2()=="Dobre"||pollution.getM_ocenaPM2()=="Poprawne"||pollution.getM_ocenaPM2()=="Umiarkowane")&&(pollution.getM_ocenaPM10()=="Dobre"||pollution.getM_ocenaPM10()=="Poprawne"||pollution.getM_ocenaPM10()=="Umiarkowane")) {
+            zmienna = "dobra";
             smogText="Dzisiaj w "+cityName.getText()+" jest dobra jakość powietrza";
             SmogTextView.setText(smogText);
         }
         else {
+            zmienna = "średnia";
             smogText="Dzisiaj w "+cityName.getText()+" jest średnia jakość powietrza";
             SmogTextView.setText(smogText);
         }
@@ -829,7 +834,7 @@ String pylenieText;
             }
             pylenie=pylenie+", trawa";
         }
-        pylenieText="Dzisiaj w "+cityName.getText()+" pylą: "+pylenie;
+        pylenieText="Dzisiaj w " + cityName.getText()+" pylą: "+ pylenie;
         PylkiTextView.setText(pylenieText);
     }
 
@@ -858,6 +863,21 @@ String pylenieText;
         params.put("start", pastEpochTime);
         params.put("end", currentEpochTime);
         letsgetHData(params);
+
+        if(zmienna=="zła")
+        {
+            smogText="Dzisiaj w "+cityName.getText()+" jest zła jakość powietrza, nie wychodź z domu jeśli to możliwe";
+            SmogTextView.setText(smogText);
+        } else if (zmienna == "dobra") {
+            smogText="Dzisiaj w "+cityName.getText()+" jest dobra jakość powietrza";
+            SmogTextView.setText(smogText);
+        }
+        else {
+            smogText="Dzisiaj w "+cityName.getText()+" jest średnia jakość powietrza";
+            SmogTextView.setText(smogText);
+        }
+
+
     }
 
     private void updateLL(coordsData coordsD)
